@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with systemd --sourcedirectory=src --parallel
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f src/release.h
+
+override_dh_auto_build:
+	dh_auto_build -- V=1
+
+override_dh_auto_install:
+	dh_auto_build -- PREFIX=debian/tmp/usr
+
+override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	./runtest
+endif

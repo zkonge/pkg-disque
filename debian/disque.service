@@ -1,0 +1,26 @@
+[Unit]
+Description=In-memory, distributed message broker
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/disque-server /etc/disque/disque.conf
+PIDFile=/var/run/disque/disque.pid
+TimeoutStopSec=0
+Restart=always
+User=disque
+Group=disque
+
+ExecStop=/bin/kill -TERM $MAINPID
+
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectHome=yes
+ProtectSystem=full
+ReadOnlyDirectories=/
+ReadWriteDirectories=-/var/lib/disque
+ReadWriteDirectories=-/var/log/disque
+ReadWriteDirectories=-/var/run/disque
+
+[Install]
+WantedBy=multi-user.target

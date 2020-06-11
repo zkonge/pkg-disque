@@ -1,0 +1,42 @@
+Source: disque
+Section: database
+Priority: optional
+Maintainer: Chris Lamb <lamby@debian.org>
+Build-Depends: debhelper (>= 9),
+               dh-systemd (>= 1.5),
+               libjemalloc-dev [linux-any],
+               procps,
+               tcl
+Standards-Version: 3.9.6
+Homepage: https://github.com/antirez/disque
+Vcs-Git: https://github.com/lamby/pkg-disque.git
+Vcs-Browser: https://github.com/lamby/pkg-disque
+
+Package: disque
+Architecture: any
+Depends: adduser,
+         disque-tools (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: In-memory, distributed message broker
+ Disque is ongoing experiment to build a distributed, in memory, message
+ broker. Its goal is to capture the essence of the "Redis as a jobs queue" use
+ case, which is usually implemented using blocking list operations, and move it
+ into an ad-hoc, self-contained, scalable, and fault tolerant design, with
+ simple to understand properties and guarantees, but still resembling Redis in
+ terms of simplicity, performances, and implementation as a C non-blocking
+ networked server.
+
+Package: disque-tools
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: In-memory, distributed message broker (client)
+ Disque is ongoing experiment to build a distributed, in memory, message
+ broker. Its goal is to capture the essence of the "Redis as a jobs queue" use
+ case, which is usually implemented using blocking list operations, and move it
+ into an ad-hoc, self-contained, scalable, and fault tolerant design, with
+ simple to understand properties and guarantees, but still resembling Redis in
+ terms of simplicity, performances, and implementation as a C non-blocking
+ networked server.
+ .
+ This package contains the command line client and other tools.

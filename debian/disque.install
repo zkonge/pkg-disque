@@ -1,0 +1,2 @@
+debian/disque.conf /etc/disque
+src/disque-server /usr/bin
